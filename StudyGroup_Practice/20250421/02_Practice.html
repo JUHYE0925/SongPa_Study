@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 나 -->
+
+    <!-- 
+        div 영역을 클릭했을 때 배경색이 파란색으로 변경되도록 하시오.
+        +응용) div 영역 클릭했을 때마다 색상이 랜덤으로 변하도록 하시오.
+    -->
+
+    <div id="area">
+        클릭하면 색이 변해요.
+    </div>
+
+    <script>
+        const $area = document.getElementById('area');
+        $area.style.width = '100px';
+        $area.style.height = '100px';
+        $area.style.border = '1px solid black';
+        $area.style.background = 'red';
+
+        const randomColor = function(){
+            const r = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+
+            return `rgb(${r}, ${g}, ${b})`
+        }
+
+        $area.addEventListener('click', function(){
+
+            $area.style.background = 'blue';
+            // $area.style.background = randomColor();
+        })
+        
+    </script>
+</body>
+</html>

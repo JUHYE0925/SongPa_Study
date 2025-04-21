@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- SE -->
+
+    <!-- JavaScript를 react 이전에 추가하고 Spring은 삭제하시오. -->
+    <!-- 
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>react</li>
+        이렇게 나오게! 
+    -->
+
+    <ul id="front">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>react</li>
+      <li>Spring</li>
+    </ul>
+
+    <script>
+        const $front = document.getElementById('front');
+
+        $front.removeChild($front.lastElementChild);
+
+        console.log($front);
+
+        const $li = document.createElement("li");
+        $li.textContent = 'JavaScript';
+
+        console.log($li);
+
+        $front.insertBefore($li, $front.lastElementChild);
+    </script>
+
+
+</body>
+</html>
