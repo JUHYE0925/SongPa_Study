@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- JM -->
+
+    <!-- 
+        select 아래 option이 몇 개 찍히는지 알 수 있는 방법과 
+        틈새라면이 보이게 할 수 있는 방법 세가지를 작성해보세요 
+    -->
+
+    <form name="delicious">
+        <label>라면</label>
+        <select id="ramen" name="ramen" value="">
+            <option value="불닭">불닭볶음면</option>
+            <option value="신">신라면</option>
+            <option value="진">진라면</option>
+            <option value="틈새">틈새라면</option>
+            <option value="열">열라면</option>
+            <option value="장인">장인라면</option>
+        </select>
+    </form>
+
+    <script>
+        const $form = document.forms.delicious;
+        const $ramen = $form.ramen;
+
+        console.log($ramen.options);
+        $ramen[3].selected = true;
+    </script>
+</body>
+</html>

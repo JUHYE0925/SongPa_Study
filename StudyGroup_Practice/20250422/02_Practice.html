@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- JH -->
+
+    <!-- 
+        글상자에 입력하는 글자 수를 공백 포함하여 계산하는 이벤트를 만드시오. 
+        다만, 글자수가 20을 초과할 경우 그만 작성하라는 경고창을 띄우시오.
+    -->
+    <form name="form">
+
+        <label>아무 말이나 하세요.</label><br>
+        <textarea name="anything" rows="10", cols="30" style="resize:none;">아무 글이나 작성해주세요.</textarea>
+        <span>0</span>/20자
+    </form>
+
+    <script>
+        const $form = document.forms.form;
+        const $textArea = $form.anything;
+
+        $textArea.addEventListener('input', (e) => {
+
+            let length = e.target.value.length;
+            $form.querySelector('span').textContent = length;
+
+            if(length > 20){
+                window.alert('그만 작성해도 될 것 같아요.')
+            }
+        });
+    
+    </script>
+
+</body>
+</html>
