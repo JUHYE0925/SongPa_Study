@@ -4,8 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .lightgray {
+          background: lightgray;
+        }
+      </style>    
 </head>
 <body>
     <!-- SE -->
+
+    <h1>회원 정보 입력하기</h1>
+    <form name="memberInfo">
+      <!--이름 입력-->
+      <label for="username">이름 : </label>
+      <input type="text" name="username" value="김시은" />
+      <br /><br />
+      <!--취미 선택-->
+      <label>취미 : </label>
+      <ul id="hobbies">
+        <li>
+          <input type="checkbox" name="hobby" value="baseball" /><label
+            >야구</label
+          >
+        </li>
+        <li>
+          <input type="checkbox" name="hobby" value="swim" /><label>수영</label>
+        </li>
+        <li>
+          <input type="checkbox" name="hobby" value="football" /><label
+            >축구</label
+          >
+        </li>
+        <li>
+          <input type="checkbox" name="hobby" value="running" /><label
+            >러닝</label
+          >
+        </li>
+      </ul>
+
+      <!--자기 소개 입력-->
+      <br /><br />
+      <label>자기소개</label>
+      <textarea
+        name="introduce"
+        id="introduce"
+        rows="5"
+        cols="30"
+        style="resize: none"
+      >
+      </textarea>
+      <span>0</span>/500자 <br /><br />
+
+      <input type="submit" name="submit" value="제출" />
+    </form>
+
+    <script>
+        // 1. 이름 입력창을 클릭할 때 value 값을 박천재로 변경하기
+
+        const $form = document.forms.memberInfo;
+        const $username = $form.username;
+        $username.addEventListener('click', () => {
+            $username.value = '박천재';
+        });
+
+        // 2. 취미에서 체크한 요소들만 배경색을 ligthgray로 변경, 체크해제 시 원래 색으로 돌아옴
+
+        const $hobbies = $form.querySelectorAll('input[name="hobby"]');
+        $hobbies.forEach((hobby) => {
+            hobby.addEventListener('change', (e) => {
+                const label = e.target.nextElementSibling;
+                if(e.target.checked){
+                    label.classList.add('lightgray');
+                } else {
+                    label.classList.remove('lightgray');
+                }
+            });
+        });
+
+        // 3. 자기소개에 글을 쓰면 textarea의 배경색 변경하기
+        
+        const $introduce = $form.introduce;
+        $introduce.addEventListener('keydown', (e) => {
+            e.target.style.backgroundColor = 'lightgray';
+        })
+
+        // 4. 글자 수 세기, 공백 제외
+
+        $introduce.addEventListener('input', (e) => {
+            const $length = e.target.value.trim().length;
+
+            $form.querySelector('span').textContent = $length;
+        });
+        
+      </script>
 </body>
 </html>
