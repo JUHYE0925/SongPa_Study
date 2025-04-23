@@ -226,3 +226,120 @@ let merged = [0, ...arr1, 5, ...arr2];
 let str = "JavaScript";
 console.log([...str]);  // [ 'J', 'a', 'v', 'a', 'S', 'c', 'r', 'i', 'p', 't' ]
 console.log(Array.from(str));  // [ 'J', 'a', 'v', 'a', 'S', 'c', 'r', 'i', 'p', 't' ]
+
+/* ----------------------------------------------------------------- */
+/* 구조 분해 할당 */
+
+// 01. 배열 구조 분해 할당
+// 구조 분해 할당을 사용하면 배열이나 객체를 변수로 분해하여 할당(연결)할 수 있다.
+
+// 기본 문법
+let nameArr = ["Gildong", "Hong"];
+let [firstName, lastName] = nameArr;
+// 풀어쓰면 다음과 같다.
+// let firstName = nameArr[0];
+// let lastName = nameArr[1];
+
+// 반환 값이 배열인 split()를 활용한 예제
+let [firstName2, lastName2] = "Saimdang Shin".split(' ');
+
+// 쉼표를 사용하여 필요하지 않은 배열 요소를 버릴 수 있다.
+// , , 형식을 통해 필요없는 요소는 무시하고 배열에 담을 수 있다.
+let [firstName3, ,lastName3] = ['firstName', 'middleName', 'lastName'];
+
+// 다양한 사용법
+// 객체 프로퍼티로도 사용할 수 있다.
+let user = {};
+[user.firstName, user.lastName] = "Gwansoon Yoon".split(' ');
+
+// 변수 교환할 때도 사용할 수 있다.
+let producer = '아무개';
+let singer = '개똥이';
+[producer, singer] = [singer, producer];
+
+// rest parameter ...로 나머지 요소들을 한 번에 가져올 수 있다.
+let [food1, food2, ...rest] = ['떡볶이', '순대', '튀김', '어묵', '김밥'];
+console.log(food1); // 떡볶이
+console.log(food2); // 순대
+console.log(rest); // ['튀김', '어묵', '김밥']
+
+// 기본 값을 설정하고 사용할 있다.
+let [drink = '사이다', beer = '맥주'] = ['콜라'];
+console.log(drink);  // 콜라
+console.log(beer);  // 맥주
+
+// 02. 객체 구조 분해 할당
+
+// 기본 문법
+
+let pansy = {
+    productName : '필통',
+    color : '흰색',
+    price : 3000
+};
+
+let {productName, color, price} = pansy;
+
+// 순서대로 적지 않아도 되며, 콜론(:)을 사용하여 변수에 담아서 사용할 수 있다.
+let {color : co, price : pr, productName : pn} = pansy;
+console.log(pn);
+console.log(co);
+console.log(pr);
+
+// 다양한 사용법
+// 객체에 존재하지 않는 프로퍼티는 기본 값을 설정해서 사용할 수 있다.
+// 또한 콜론을 통해 변수 지정하고 동시에 기본값을 할당할 수 있다.
+
+let shirts = {
+    productName : '베이직 셔츠'
+};
+
+let {productName : productName2 = '어떤 상품', color : color2 = '어떤 색상', price : price2 = 0} = shirts;
+console.log(`productName2 : ${productName2}`);
+console.log(`color2 : ${color2}`);
+console.log(`price2 : ${price2}`);
+
+// 나머지 매개변수 ...로 나머지 요소들을 한 번에 가져올 수 있다.
+let { productName: productName4, ...products} = pansy;
+console.log(productName4);
+console.log(products.color);  // ...products로 나머지 프로퍼티를 products로 담아서 오기 때문에 products.프로퍼티명 형태로 접근해야한다.
+console.log(products.price);
+
+// 중첩 구조 분해
+// 구조 분해 할당의 구조가 중첩으로 되어있다.
+let product = {
+    size : {
+        width : 10,
+        height : 30
+    },
+    item : ['doll', 'robot']
+};
+
+let {
+    size : {
+        width,
+        height
+    },
+    item : [item1, item2],
+    productor = '홍길동'
+} = product;
+
+// 함수의 매개변수
+// 함수의 매개변수가 많거나 기본값이 필요할 경우 등에 구조 분해 할당을 이용할 수 있다.
+// 기본적으로 함수는 매개변수가 존재할 경우 매개변수의 갯수와 순서가 일치하여야한다.
+// 그렇기 때문에 매개변수가 많을 때도 매개변수 순서와 갯수를 일치시키고 기본값을 지정하고싶을 때 undefined를 줘야한다는 단점이 있다.
+// 이를 해결할 수 있는 방법이 구조 분해 할당을 이용하는 방법이다.
+// 함수의 매개변수를 {}로 묶어서 사용하면 매개변수의 갯수와 순서를 지키지 않아도 되며
+// 기본값을 사용하고 싶을 때 undefined를 사용하지 않아도 된다.
+function displayProduct({producer = "아무개", width = 10, height = 20, items = []}){
+    console.log(`${producer}, ${width}, ${height}`);
+    console.log(`items : ${items}`);
+}
+
+// 함수에 전달할 객체
+let exampleProduct = {
+    items : ['coffee', 'docut'],
+    producer : '신사임당'
+};
+
+displayProduct(exampleProduct);

@@ -9,6 +9,10 @@
             background : lightblue;
             outline : 3px dashed green;
         }
+
+        .yellowgreen{
+            background : yellowgreen;
+        }
     </style>
 </head>
 <body>
@@ -40,9 +44,11 @@
         <textarea name="request" id="request" rows="8" cols="30" style="resize:none;"></textarea><br>
         <span>0</span>/500자
         <br><br>
-        <input type="checkbox" name="agree" id="agree"><label for="agree">개인정보 수집에 동의합니다.</label>
-
-        <br><br>
+        
+        <div name="div">
+            <input type="checkbox" name="agree" id="agree">개인정보 수집에 동의합니다.</label>
+        </div> <br><br>
+        
         <button type="submit" id="button" name="button">신청하기</button>
     </form>
 
@@ -70,6 +76,33 @@
                 e.preventDefault();
             } 
         });
+
+        // textarea 500글자 제한
+        const $request = $form.request;
+
+        $request.addEventListener('input', (e) => {
+            let length = e.target.value.length;
+
+            if(length > 500){
+                e.target.value = e.target.value.slice(0, 500);
+                length = 500;
+            }
+
+            const span = $form.querySelector('span');
+            span.textContent = length;
+        });
+
+        // 동의 체크 박스 색상 변경
+        const $agree = $form.agree;
+        $agree.addEventListener('click', (e) => {
+            // e.target.classList.toggle('yellowgreen');
+            // e.target.nextElementSibling.classList.toggle('yellowgreen');
+            $form.querySelector('div').classList.toggle('yellowgreen');
+        });
+
+        $form.button.style.backgroundColor = 'skyblue';
+        $form.button.style.border = '1px solid black';
+
     </script>
 </body>
 </html>
