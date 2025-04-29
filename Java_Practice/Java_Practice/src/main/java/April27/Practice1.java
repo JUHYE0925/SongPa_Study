@@ -2,7 +2,7 @@ package April27;
 
 import java.util.Scanner;
 
-public class Pratice1 {
+public class Practice1 {
 
     public static void main(String[] args) {
 
@@ -28,7 +28,7 @@ public class Pratice1 {
         System.out.println("0 이상  3000이하인 정수를 입력해주세요.");
         int number = sc.nextInt();
 
-        Pratice1 practice1 = new Pratice1();
+        Practice1 practice1 = new Practice1();
         int result = practice1.solution(number);
         System.out.println("약수의 합 : " + result);
 
