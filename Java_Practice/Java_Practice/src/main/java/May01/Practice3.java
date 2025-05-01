@@ -1,5 +1,7 @@
 package May01;
 
+import java.util.Arrays;
+
 public class Practice3 {
 
     public static void main(String[] args) {
@@ -27,5 +29,32 @@ public class Practice3 {
         * [1, 3, 5, 7]에는 짝수가 없고 홀수가 네 개 있습니다.
         */
 
+        int[] num_list = {1, 2, 3, 4, 5};
+
+        Practice3 pr3 = new Practice3();
+        int[] result = pr3.solution(num_list);
+        System.out.println(Arrays.toString(result));
+
+    }
+
+    public int[] solution(int[] num_list){
+
+        int resultArr[] = new int[2];
+
+        int evenCount = 0;
+        int oddCount = 0;
+
+        for(int i = 0; i < num_list.length; i++){
+            if(num_list[i] % 2 == 0){
+                evenCount++;
+            } else {
+                oddCount++;
+            }
+        }
+
+        resultArr[0] = evenCount;
+        resultArr[1] = oddCount;
+
+        return resultArr;
     }
 }
