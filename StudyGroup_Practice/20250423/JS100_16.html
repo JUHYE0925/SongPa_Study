@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <!-- 문제16 : 로꾸거 -->
+
+    <!-- 
+        문장이 입력되면 거꾸로 출력하는 프로그램을 만들어 봅시다.
+
+        입출력
+
+        입력 : 거꾸로
+        출력 : 로꾸거
+    -->
+
+    <script>
+        const $word = window.prompt('원하는 문구를 입력하세요.');
+
+        const wordList = [...$word];
+        console.log(wordList);
+        // console.log(wordList.reverse()) 또는 그냥 배열을 그대로 찍어서 그래요.(로, 꾸, 꺼) 
+        // 배열을 그냥 출력하면 브라우저 콘솔에서 자동으로 쉼표로 구분해서 보여준다다.
+        // 쉼표 없이 깔끔하게 하나의 문자열로 출력하고 싶다면 join('')을 꼭 써줘야 한다.
+        const reversed = wordList.reverse().join('');
+        console.log(reversed);
+    </script>
+</body>
+</html>

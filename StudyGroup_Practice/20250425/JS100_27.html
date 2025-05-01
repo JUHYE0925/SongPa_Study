@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제27 : 객체 만들기 -->
+
+    <!-- 
+        첫번째 입력에서는 학생의 이름이 공백으로 구분되어 입력되고, 두번째에는 그 학생의 수학 점수가 공백으로 구분되어 주어집니다.
+        두 개를 합쳐 학생의 이름이 key이고 value가 수학 점수인 객체를 출력해주세요.
+
+        입력
+        Yujin Hyewon
+        70 100
+
+        출력
+        {'Yujin': 70, 'Hyewon': 100}
+    -->
+
+    <script>
+        const names = prompt('학생들의 이름을 공백으로 구분하여 입력하세요. ex)Yujin Heywon').split(' ');
+        const mathScores = prompt('학생들의 수학 점수를 공백으로 구분하여 입력하세요. ex)70 100').split(' ').map(Number);
+
+        console.log(names);
+        console.log(mathScores);
+
+        const Student = {};
+
+        for(let i = 0; i < names.length; i++){
+            Student[names[i]] = mathScores[i];
+            // Student.names[i] = mathScores[i];
+        }
+        console.log(Student);
+        alert(Student);
+        
+        // 마침표 표기법과 대괄효 표기법
+        // 마침표 표기법은 정적인 키 이름에만 사용 가능하다.
+        // 즉 문자 그대로의 이름을 써야하므로 변수나 표현식을 키로 사용 불가하다.
+        // const obj = {}; obj.name = 'Yujin'; 의 경우 name이라는 키가 생기므로 사용 가능하다.
+        // const key = 'name'; obj.key = 'Yujin'; 의 경우에는 name이라는 키가 생기는 것이 아니라 key라는 키가 생긴다.
+        // 반면 대괄호 표기법은 동적인 키 이름을 만들 수 있어 변수나 표현식을 키로 쓸 수 있다.
+        // const key = 'name'; obj[key] = 'Yujin'; 의 경우 name이라는 키가 생성된다.
+    </script>
+</body>
+</html>

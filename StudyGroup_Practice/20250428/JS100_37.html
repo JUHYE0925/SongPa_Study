@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제37 : 반장 선거  -->
+
+    <!-- 
+        새 학기를 맞아 호준이네 반은 반장 선거를 하기로 했습니다.
+        그런데 표를 하나씩 개표하는 과정이 너무 번거롭게 느껴진 당신은 
+        학생들이 뽑은 후보들을 입력받으면 뽑힌 학생의 이름과 받은 표 수를 
+        출력하는 프로그램을 작성하기로 하였습니다.
+
+        입력
+        원범 원범 혜원 혜원 혜원 혜원 유진 유진
+        출력
+        혜원(이)가 총 4표로 반장이 되었습니다.
+    -->
+
+    <script>
+        const candidate = prompt("반장으로 뽑힌 학생들의 이름을 입력해주세요.").split(' ');
+
+        // 중복 제거
+        const noDupName = candidate.filter((name, index) => {
+            return candidate.indexOf(name) === index;
+        });
+        console.log(noDupName);
+
+        // let count = 0;
+        // let countArr = new Array(noDupName.length);
+        // for(let i = 0; i < candidate.length; i++){
+        //     for(let j = 0; j < noDupName.length; j++){
+
+        //         if(candidate[i] === noDupName[j]){
+        //             countArr[j] = count++;   
+        //         }
+
+        //     }
+        // }
+        // console.log(`${noDupName[j]} : ${countArr[j]}`);
+        
+        let obj = {};
+        let countArr = new Array(noDupName.length); 
+
+        for(let i = 0; i < noDupName.length; i++) {
+            countArr[i] = 0;
+            for(let j = 0; j < candidate.length; j++) {
+                if(noDupName[i] == candidate[j]) {
+                    countArr[i]++;
+                }
+            }
+            console.log(`${noDupName[i]} : ${countArr[i]} }`)
+
+            obj[noDupName[i]] = countArr[i]
+        }
+
+        console.log(obj);
+        console.log(Math.max(...countArr));
+
+        let max = Math.max(...countArr);
+        let name = Object.keys(obj).find(key => obj[key] === max) ;
+
+        console.log(`${name}(이)가 ${max}표로 반장이 되었습니다.`);
+        
+
+     
+
+
+
+
+    </script>
+
+    <!-- <script>
+        const candidate = prompt("반장으로 뽑힌 학생들의 이름을 입력해주세요.").split(' ');
+        let result = {};
+        let winner = "";
+
+        for(let index in candidate){
+            let value = candidate[index];
+            result[value] = result[value] === undefined ? 1 : result[value] = result[value] + 1;
+        }
+
+        winner - Object.keys(result).reduce((a, b) => result[a] > result[b] ? a : b);
+
+        console.log(`${winner}(이)가 총 ${result[winner]}표로 반장이 되었습니다.`)
+    </script> -->
+</body>
+</html>

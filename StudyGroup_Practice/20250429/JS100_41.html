@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제41 : 소수판별 -->
+
+    <!-- 
+        숫자가 주어지면 소수인지 아닌지 판별하는 프로그램을 작성해주세요.
+        소수이면 YES로, 소수가 아니면 NO로 출력해주세요.
+        (소수 : 1과 자기 자신만으로 나누어떨어지는 1보다 큰 양의 정수)
+    -->
+
+    <script>
+
+        var number = prompt('숫자를 입력해주세요.');
+
+        var measure = [];
+
+        for(let i = 1; i <= number; i++){
+            if(number % i == 0){
+                measure.push(i);
+            }
+        }
+        console.log(measure);
+
+        if(measure[0] == 1 && measure[1] == number){
+            alert("YES");
+        } else {
+            alert("NO");
+        }
+
+    </script>
+</body>
+</html>

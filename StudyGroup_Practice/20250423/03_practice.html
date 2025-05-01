@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>버튼을 클릭하면, 첫 번째 체크박스의 항목을 체크해주세요.</h3>
+
+    <form name="form">
+        <input type="checkbox" name="language" id="Java"><label for="Java">Java</label> <br>
+        <input type="checkbox" name="language" id="DataBase"><label for="Java">DataBase</label> <br>
+        <input type="checkbox" name="language" id="Web"><label for="Java">Web</label> <br>
+
+        <button type="button" name="button">클릭</button>
+    </form>
+
+    <script>
+        const $form = document.forms.form;
+        const $button = $form.button;
+
+        $button.addEventListener('click', (e) => {
+            $form.querySelector('input[type=checkbox]').checked = true;
+        });
+    </script>
+</body>
+</html>

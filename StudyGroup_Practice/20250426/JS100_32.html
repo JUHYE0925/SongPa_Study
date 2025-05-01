@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제32 : 문자열 만들기 -->
+
+    <!-- 
+        취업 준비생인 혜림이는 자기소개서를 쓰고 있습니다. 
+        열심히 자기소개서를 작성하던 도중 
+        혜림이는 자기가 지금까지 단어를 얼마나 적었는지 궁금하게 됩니다. 
+        혜림이를 위해 문자열을 입력받으면 
+        단어의 갯수를 출력하는 프로그램을 작성해 주세요.
+
+        입출력
+        입력 : 안녕하세요. 저는 제주대학교 컴퓨터공학전공 혜림입니다.
+        출력 : 5
+    -->
+
+    <script>
+        const content = prompt('자기소개서 내용을 입력하세요.').split(' ');
+
+        alert(`입력하신 내용 속 단어의 갯수는 ${content.length}개 입니다.`);
+    </script>
+</body>
+</html>

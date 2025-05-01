@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제19 : 제곱을 구하자 -->
+
+    <!-- 
+        공백으로 구분하여 두 숫자 a와 b가 주어지면, a의 b승을 구하는 프로그램을 작성하세요.
+    -->
+
+    <script>
+        const number = prompt('두 숫자를 입력하시오. 예) 10 20').split(' ').map(Number);
+        console.log(number);
+        [firstNum, secondNum] = [...number];
+
+        const result = Math.pow(firstNum, secondNum);
+        alert(`${firstNum}의 ${secondNum}승은 ${result}이다.`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제36 : 구구단 출력하기 -->
+
+    <!-- 
+        1~9까지의 숫자 중 하나를 입력하면 그 단의 구구단 결과를 한 줄에 출력하는 프로그램을 작성하세요.
+
+        입출력
+        입력 : 2
+        출력 : 2 4 6 8 10 12 14 16 18
+    -->
+
+    <script>
+        const dan = Number(prompt("1 ~9단까지 중 출력하고 싶은 단의 수를 입력하세요."));
+        let result = '';
+
+        for(let i = 1; i <= 9; i++){
+            result += dan * i + ' ';  // 문자열 합치기처럼 사용하기
+        }
+
+        alert(result);
+    </script>
+</body>
+</html>
