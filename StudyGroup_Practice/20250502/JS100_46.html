@@ -16,19 +16,33 @@
 
     <script>
 
-        let unitSum = 0;
-        let totalSum = 0;
+        // 방안1 -> 1부터 20을 배열에 담아서 계산
+
+        let unitSum1 = 0;
+        let numArr = [];
 
         for(let i = 1; i <= 20; i++){
-            for(let j = 0; j < i.toString.length; j++){
-                unitSum += i[j];
-                console.log(i[j]);
+            numArr.push(String(i));
+            for(let j = 0; j < numArr[i - 1].length; j++){
+                unitSum1 += Number(numArr[i - 1][j]);
+                // console.log(`aaaa ${Number(numArr[i - 1][j])}`)
+                // console.log(`ssss ${unitSum1}`);
             }
-            totalSum += unitSum;
         }
+        console.log(unitSum1);
+        console.log(numArr);
 
-        alert(totalSum);
-        console.log(totalSum);
+        // 방안2 -> 1부터 20을 문자열로 바꾼 후 변수에 담아서 계산하기.  -> 이 방법이 더 정확한 방법인 듯.
+        let unitSum2 = 0;
+        let str;
+
+        for(let i = 10; i <= 15; i++){
+            str = String(i)
+            for(let j = 0; j < str.length; j++){
+                unitSum2 += Number(str[j]);
+            }
+        }
+        console.log(unitSum2);
 
     </script>
 </body>
