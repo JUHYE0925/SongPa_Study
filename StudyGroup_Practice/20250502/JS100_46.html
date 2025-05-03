@@ -13,5 +13,23 @@
         예를 들어 10부터 15까지의 모든 숫자를 일렬로 놓으면 101112131415이고 
         각 자리의 숫자를 더하면 21입니다. (1+0+1+1+1+2+1+3+1+4+1+5 = 21)
     -->
+
+    <script>
+
+        let unitSum = 0;
+        let totalSum = 0;
+
+        for(let i = 1; i <= 20; i++){
+            for(let j = 0; j < i.toString.length; j++){
+                unitSum += i[j];
+                console.log(i[j]);
+            }
+            totalSum += unitSum;
+        }
+
+        alert(totalSum);
+        console.log(totalSum);
+
+    </script>
 </body>
 </html>

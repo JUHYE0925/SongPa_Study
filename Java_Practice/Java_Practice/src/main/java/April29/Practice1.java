@@ -1,4 +1,4 @@
-package April29;
+package april29;
 
 public class Practice1 {
 
@@ -37,15 +37,15 @@ public class Practice1 {
     }
 
     public int solution(){
-//        String[] arr1 = {"a", "b", "c"};
-//        String[] arr2 = {"com", "b", "d", "p", "c"};
-        String[] arr1 = {"n", "omg"};
-        String[] arr2 = {"m", "dot"};
+        String[] arr1 = {"a", "b", "c"};
+        String[] arr2 = {"com", "b", "d", "p", "c"};
+//        String[] arr1 = {"n", "omg"};
+//        String[] arr2 = {"m", "dot"};
 
         int count = 0;
         for(int i = 0; i < arr1.length; i++){
             for(int j = 0; j < arr2.length; j++){
-                if(arr1[i] == arr2[j]){
+                if(arr1[i].equals(arr2[j])){
                     count++;
                 }
             }

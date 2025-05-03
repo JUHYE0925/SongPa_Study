@@ -1,6 +1,4 @@
-package May01;
-
-import java.util.Map;
+package april30;
 
 public class Practice2 {
 
