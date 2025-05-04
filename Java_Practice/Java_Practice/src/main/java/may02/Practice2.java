@@ -52,6 +52,7 @@ public class Practice2 {
         if(slice >= people){
             result = 1;
         } else {
+            // Math.ceil : 올림 메소드, double형 반환함
             result = (int)Math.ceil(people / slice);
         }
 
