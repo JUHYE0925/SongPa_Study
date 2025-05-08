@@ -17,5 +17,20 @@
         출력 : 10
     -->
 
+    <script>
+
+        let numbers = prompt("숫자를 입력하세요.").split(' ').map(Number);
+
+        console.log(numbers);
+
+        //numbers 배열을 전달하면 Math.max()는 배열을 한 번에 처리할 수 없어서 NaN을 반환한다.
+        // 배열을 Math.max()에 적용하려면 **apply()**나 스프레드 연산자(...)를 사용해야 한다.
+        let maxNumber = Math.max(...numbers);
+
+        console.log(maxNumber);
+        alert(maxNumber);
+        
+    </script>
+
 </body>
 </html>

@@ -42,14 +42,40 @@
 
 /* 이른 초기화와 게으른 초기화 설명하시오 */
 // <이른 초기화>
-// 
-//
-// https://velog.io/@y_dragonrise/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-%EC%8B%B1%EA%B8%80%ED%86%A4-%ED%8C%A8%ED%84%B4Singleton-Pattern
+// 이른 초기화는 객체를 생성할 때 프로그램이 시작될 때 즉시 초기화가 이루어지는 방식이다.
+// 이 방식은 객체를 사용하기 이전에 이미 객체가 생성되어 있기 때문에 해당 객체를 사용할 때 빠르게 접근 가능하다.
+// 클래스가 로드되는 시점에 이미 객체가 생성되므로, 성능적인 이점이 있지만, 클래스 로딩 시 초기화 비용이 발생할 수 있다.
+// 또한 자원을 미리 할당하므로 불필요한 자원 낭비가 있을 수 있다. 예를 들면 객체가 절대로 사용되지 않더라도 이미 초기화되어 메모리를 차지하게 된다.
+// 멀티스레드 환경에서 스레드 안전성을 고려할 필요가 없으므로 코드가 간단하다. 
+// 예시:
+// public class EagerInitialization {
+//     private static final EagerInitialization instance = new EagerInitialization();
+//     private EagerInitialization() {}
+//     public static EagerInitialization getInstance() {
+//         return instance;
+//     }
+// }
+// <게으른 초기화>
+// 게으른 초기화는 객체를 실제로 필요할 때까지 초기화를 지연시키는 방식이다.
+// 즉 객체가 필요할 때 생성하는 방식으로 객체가 실제로 호출될 때까지 메모리나 리소스를 할당하지 않기 때문에 초기화 시점이 늦어지지만
+// 불필요한 자원 낭비를 줄일 수 있다. 하지만 첫 호출 시 객체를 생성하기 때문에 성능 비용이 발생할 수 있다.
+// 또한 멀티스레드 환경에서는 동기화 문제가 발생할 수 있기 때문에, 이를 해결하기 위한 추가적인 코드가 필요하다.
+// 예시:
+// public class LazyInitialization {
+//     private static LazyInitialization instance;
+//     private LazyInitialization() {}
+//     public static LazyInitialization getInstance() {
+//         if (instance == null) {
+//             synchronized (LazyInitialization.class) { // 동기화
+//                 if (instance == null) {
+//                     instance = new LazyInitialization();
+//                 }
+//             }
+//         }
+//         return instance;
+//     }
+// }
 
 /* final 키워드 */
 
 /* 변수 저장 메모리, 생성 시기 정리하기 */
-
-/* 초기화 블록 */
-
-/* 오버로딩과 오버라이딩의 차이를 설명하시오 - 오버라이딩 배우면 넣기 */

@@ -17,5 +17,27 @@
         출력 : aaabbbCCCDDD
     -->
 
+    <script>
+
+        let str = window.prompt("문자열을 입력하세요.");
+        let newStr = "";
+
+        for(let i = 0; i < str.length; i++){
+            let char = str.charAt(i);
+
+            if(char >= 'A' && char <= 'Z'){
+                console.log(char);
+                newStr += char.toLowerCase();
+            } else if(char >= 'a' && char <= 'z'){
+                console.log(char);
+                newStr += char.toUpperCase();
+            }
+        }
+
+        console.log(newStr);
+        alert(newStr);
+
+    </script>
+
 </body>
 </html>
