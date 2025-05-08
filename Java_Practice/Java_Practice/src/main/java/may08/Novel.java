@@ -1,4 +1,4 @@
-package may08.grouppractice;
+package may08;
 
 public class Novel extends Book{
 

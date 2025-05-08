@@ -1,4 +1,4 @@
-package may08.grouppractice;
+package may08;
 
 public class Application {
 
@@ -25,7 +25,7 @@ public class Application {
         /*
         * 설계
         * 1. Book 클래스(부모 클래스) 하위 카테고리 자식 클래스(소설, 만화, 에세이, 시)
-        * 2. Book 클래스 필드 : 도서번호, 도서명, 저자, 출판사, 카테고리명(final static), 도서 수(static, 지역변수) / 메소드 : 도서 정보 출력
+        * 2. Book 클래스 필드 : 도서번호, 도서명, 저자, 출판사, 카테고리명(final static), 도서 수(static) / 메소드 : 도서 정보 출력
         * 3. 오버라이딩 메소드 : 도서 정보 출력, 카테고리별 도서 수 출력(static)
         * 4. 소설 클래스 필드 : 장르 / 메소드 : 장르 출력
         * 5. 만화 클래스 필드 : 컬러 / 메소드 : 흑밸/컬러 여부 문자열로 반환

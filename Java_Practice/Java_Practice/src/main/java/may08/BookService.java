@@ -1,8 +1,8 @@
-package may08.grouppractice;
+package may08;
 
 public class BookService {
 
-    public void selectAllBook(){
+    public void registBook(){
 
         Book[] books = new Book[12];
         books[0] = new Book(1, "동백꽃", "김유정", "칼로스");
