@@ -6,19 +6,17 @@ public class Book {
     private String bookName;
     private String author;
     private String publisher;
-    private final static String CATEGORY_NOVEL = "소설";
-    private final static String CATEGORY_COMIC = "만화";
-    private final static String CATEGORY_ESSAY = "에세이";
-    private final static String CATEGORY_PEOM = "시";
+    private String category;
     private static int categoryCount;
 
     public Book(){}
 
-    public Book(int bookNum, String bookName, String author, String publisher) {
+    public Book(int bookNum, String bookName, String author, String publisher, String category) {
         this.bookNum = bookNum;
         this.bookName = bookName;
         this.author = author;
         this.publisher = publisher;
+        this.category = category;
     }
 
     public int getBookNum() {
@@ -53,6 +51,14 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public static int getCategoryCount() {
         return categoryCount;
     }
@@ -61,14 +67,14 @@ public class Book {
         Book.categoryCount = categoryCount;
     }
 
-    public String getInformation() {
+    @Override
+    public String toString() {
         return "Book{" +
                 "bookNum=" + bookNum +
                 ", bookName='" + bookName + '\'' +
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
-
-
 }

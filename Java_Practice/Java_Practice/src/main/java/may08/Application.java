@@ -1,5 +1,7 @@
 package may08;
 
+import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -32,6 +34,37 @@ public class Application {
         * 6. 에세이 클래스 필드 : 주제 / 메소드 : 에세이 주제 출력
         * 7. 시 필드 : 장르 / 메소드 : 장르 출력
         */
+
+        Scanner sc = new Scanner(System.in);
+
+        BookService bookService = new BookService();
+
+        while(true){
+            System.out.println("============= 도서 관리 프로그램 =============");
+            System.out.println("1. 도서 등록");
+            System.out.println("2. 도서 전체 조회");
+            System.out.println("3. 소설 조회");
+            System.out.println("4. 만화 조회");
+            System.out.println("5. 에세이 조회");
+            System.out.println("6. 시 조회");
+            System.out.println("9. 프로그램 종료");
+            System.out.println("메뉴 선택 : ");
+            int no = sc.nextInt();
+
+            switch(no){
+                case 1 : bookService.registBook(); break;
+                case 2 :
+                case 3 :
+                case 4 :
+                case 5 :
+                case 6 :
+                case 9 :
+                    System.out.println("프로그램을 종료합니다."); return;
+                default :
+                    System.out.println("잘못된 번호를 입력하셨습니다."); break;
+            }
+        }
+
 
 
 
