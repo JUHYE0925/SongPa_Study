@@ -4,4 +4,6 @@ public class Comic extends Book{
 
     private boolean isColor;
 
+
+
 }

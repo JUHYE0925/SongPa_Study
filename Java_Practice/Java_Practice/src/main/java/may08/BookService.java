@@ -4,6 +4,7 @@ public class BookService {
 
     public void registBook(){
 
+        // comic, novel, essay, peom 으로 객체 생성한 후 각각 고유의 필드 값을 초기화하기
         Book[] books = new Book[12];
         books[0] = new Book(1, "동백꽃", "김유정", "칼로스", "소설");
         books[1] = new Book(2, "주술회전", "아쿠타미 게게", "서울미디어코믹스", "만화");
