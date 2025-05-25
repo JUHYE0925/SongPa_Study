@@ -12,4 +12,24 @@ public class PublisherDAO {
 
         return sqlSession.selectList("PublisherMapper.selectAllEmp");
     }
+
+
+    public PublisherDTO selectEmpByEmpId(SqlSession sqlSession, String empId) {
+
+        return sqlSession.selectOne("PublisherMapper.selectEmpByEmpId", empId);
+    }
+
+    public int insertNewEmp(SqlSession sqlSession, PublisherDTO emp) {
+
+        return sqlSession.insert("PublisherMapper.insertNewEmp", emp);
+    }
+
+    public int modifyEmp(SqlSession sqlSession, PublisherDTO emp) {
+        return sqlSession.update("PublisherMapper.modifyEmp", emp);
+    }
+
+    public int deleteEmp(SqlSession sqlSession, String empId) {
+
+        return sqlSession.delete("PublisherMapper.deleteEmp", empId);
+    }
 }
