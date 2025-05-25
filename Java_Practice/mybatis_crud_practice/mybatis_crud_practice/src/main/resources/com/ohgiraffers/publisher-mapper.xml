@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PublisherMapper">
+    <resultMap id="publisherResultMap" type="com.ohgiraffers.model.PublisherDTO">
+        <id property="empId" column="EMP_ID"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="email" column="EMAIL"/>
+        <result property="deptCode" column="DEPT_CODE"/>
+        <result property="salary" column="SALARY"/>
+        <result property="hireDate" column="HIRE_DATE"/>
+    </resultMap>
+
+    <select id="selectAllEmp" resultMap="publisherResultMap">
+        SELECT
+               *
+          FROM EMPLOYEE_LIST
+         ORDER BY EMP_ID
+    </select>
+</mapper>
