@@ -1,10 +1,12 @@
 package com.ohgiraffers.controller;
 
+import com.ohgiraffers.model.EmployeeAndDeptDTO;
 import com.ohgiraffers.model.PublisherDAO;
 import com.ohgiraffers.model.PublisherDTO;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.ohgiraffers.config.Template.getSqlSession;
 
@@ -21,6 +23,18 @@ public class PublisherService {
         SqlSession sqlSession = getSqlSession();
 
         List<PublisherDTO> empList = publisherDAO.selectAllEmp(sqlSession);
+
+        sqlSession.close();
+
+        return empList;
+
+    }
+
+    public List<EmployeeAndDeptDTO> selectAllEmpAndDept() {
+
+        SqlSession sqlSession = getSqlSession();
+
+        List<EmployeeAndDeptDTO> empList = publisherDAO.selectAllEmpAndDept(sqlSession);
 
         sqlSession.close();
 
@@ -70,6 +84,23 @@ public class PublisherService {
         return result > 0 ? true : false;
     }
 
+    public boolean modifyEmpAllOrSome(Map<String, Object> criteria) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        int result = publisherDAO.modifyEmpAllOrSome(sqlSession, criteria);
+
+        if(result > 0){
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result > 0 ? true : false;
+    }
+
     public boolean deleteEmp(String empId) {
 
         SqlSession sqlSession = getSqlSession();
@@ -85,4 +116,5 @@ public class PublisherService {
         return result > 0 ? true : false;
 
     }
+
 }

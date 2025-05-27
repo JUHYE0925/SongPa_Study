@@ -1,10 +1,11 @@
 package com.ohgiraffers.controller;
 
+import com.ohgiraffers.model.EmployeeAndDeptDTO;
 import com.ohgiraffers.model.PublisherDTO;
 import com.ohgiraffers.view.PrintResult;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,18 @@ public class PublisherController {
 
         if(empList != null){
             printResult.printAllEmp(empList);
+        } else {
+            printResult.printErrorMessage("selectList");
+        }
+
+    }
+
+    public void selectAllEmpAndDept() {
+
+        List<EmployeeAndDeptDTO> empList = publisherService.selectAllEmpAndDept();
+
+        if(empList != null){
+            printResult.printAllEmpAndDept(empList);
         } else {
             printResult.printErrorMessage("selectList");
         }
@@ -92,6 +105,26 @@ public class PublisherController {
 
     }
 
+    public void modifyEmpAllOrSome(Map<String, String> parameter) {
+
+        String empId = parameter.get("empId");
+        String deptCode = parameter.get("deptCode");
+        String salary = parameter.get("salary");
+
+        Map<String, Object> criteria = new HashMap<>();
+        criteria.put("empId", empId);
+        criteria.put("deptCode", deptCode);
+        criteria.put("salary", salary);
+
+
+        if(publisherService.modifyEmpAllOrSome(criteria)){
+            printResult.printSuccessMessage("modify");
+        } else {
+            printResult.printErrorMessage("modify");
+        }
+
+    }
+
     public void deleteEmp(Map<String, String> parameter) {
 
         String empId = parameter.get("empId");
@@ -103,4 +136,5 @@ public class PublisherController {
         }
 
     }
+
 }

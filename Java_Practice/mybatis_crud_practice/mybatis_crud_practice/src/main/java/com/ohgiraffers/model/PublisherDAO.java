@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 public class PublisherDAO {
 
@@ -11,6 +12,11 @@ public class PublisherDAO {
     public List<PublisherDTO> selectAllEmp(SqlSession sqlSession) {
 
         return sqlSession.selectList("PublisherMapper.selectAllEmp");
+    }
+
+    public List<EmployeeAndDeptDTO> selectAllEmpAndDept(SqlSession sqlSession) {
+
+        return sqlSession.selectList("PublisherMapper.selectEmpAndDept");
     }
 
 
@@ -28,8 +34,14 @@ public class PublisherDAO {
         return sqlSession.update("PublisherMapper.modifyEmp", emp);
     }
 
+    public int modifyEmpAllOrSome(SqlSession sqlSession, Map<String, Object> criteria) {
+
+        return sqlSession.update("PublisherMapper.modifyEmpAllOrSome", criteria);
+    }
+
     public int deleteEmp(SqlSession sqlSession, String empId) {
 
         return sqlSession.delete("PublisherMapper.deleteEmp", empId);
     }
+
 }

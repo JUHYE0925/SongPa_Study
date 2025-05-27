@@ -12,52 +12,93 @@
         <result property="hireDate" column="HIRE_DATE"/>
     </resultMap>
 
+    <resultMap id="employeeAndDeptResultMap" type="com.ohgiraffers.model.EmployeeAndDeptDTO">
+        <id property="empId" column="EMP_ID"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="email" column="EMAIL"/>
+        <result property="salary" column="SALARY"/>
+        <result property="hireDate" column="HIRE_DATE"/>
+        <association property="deptCode" resultMap="departmentResultMap"/>
+    </resultMap>
+
+    <resultMap id="departmentResultMap" type="com.ohgiraffers.model.DepartmentDTO">
+        <id property="deptCode" column="DEPT_ID"/>
+        <result property="deptTitle" column="DEPT_TITLE"/>
+    </resultMap>
+
     <select id="selectAllEmp" resultMap="publisherResultMap">
         SELECT
-        *
-        FROM EMPLOYEE_LIST
-        ORDER BY EMP_ID
+               *
+          FROM EMPLOYEE_LIST
+         ORDER BY EMP_ID
+    </select>
+
+    <select id="selectEmpAndDept" resultMap="employeeAndDeptResultMap">
+        SELECT
+               A.EMP_ID
+             , A.EMP_NAME
+             , A.EMAIL
+             , B.DEPT_ID
+             , B.DEPT_TITLE
+             , A.SALARY
+             , A.HIRE_DATE
+          FROM EMPLOYEE_LIST A
+          JOIN EMPLOYEE_DEPT B ON (A.DEPT_CODE = B.DEPT_ID)
+         ORDER BY EMP_ID
     </select>
 
     <select id="selectEmpByEmpId" parameterType="String" resultMap="publisherResultMap">
         SELECT
-        *
-        FROM EMPLOYEE_LIST
-        WHERE EMP_ID = #{ empId }
+               *
+          FROM EMPLOYEE_LIST
+         WHERE EMP_ID = #{ empId }
     </select>
 
     <insert id="insertNewEmp" parameterType="com.ohgiraffers.model.PublisherDTO">
         INSERT INTO EMPLOYEE_LIST
         (
-        EMP_ID
-        , EMP_NAME
-        , EMAIL
-        , DEPT_CODE
-        , SALARY
-        , HIRE_DATE
+            EMP_ID
+          , EMP_NAME
+          , EMAIL
+          , DEPT_CODE
+          , SALARY
+          , HIRE_DATE
         )
         VALUES
         (
-        #{ empId }
-        , #{ empName }
-        , #{ email }
-        , #{ deptCode }
-        , #{ salary }
-        , #{ hireDate }
+            #{ empId }
+          , #{ empName }
+          , #{ email }
+          , #{ deptCode }
+          , #{ salary }
+          , #{ hireDate }
         )
     </insert>
 
     <update id="modifyEmp" parameterType="com.ohgiraffers.model.PublisherDTO">
         UPDATE EMPLOYEE_LIST
-        SET EMP_NAME = #{ empName }
-        , EMAIL = #{ email }
-        , DEPT_CODE = #{ deptCode }
-        , SALARY = #{ salary }
+           SET EMP_NAME = #{ empName }
+             , EMAIL = #{ email }
+             , DEPT_CODE = #{ deptCode }
+             , SALARY = #{ salary }
+         WHERE EMP_ID = #{ empId }
+    </update>
+
+    <update id="modifyEmpAllOrSome" parameterType="hashmap">
+        UPDATE EMPLOYEE_LIST
+        <trim prefix="set" prefixOverrides=",">
+            <if test="deptCode != null and deptCode != ''">
+                DEPT_CODE = #{ deptCode }
+            </if>
+            <if test="salary != null and salary != ''">
+              , SALARY = #{ salary }
+            </if>
+        </trim>
         WHERE EMP_ID = #{ empId }
     </update>
 
     <delete id="deleteEmp" parameterType="String">
         DELETE FROM EMPLOYEE_LIST
-        WHERE EMP_ID = #{ empId }
+         WHERE EMP_ID = #{ empId }
     </delete>
 </mapper>
