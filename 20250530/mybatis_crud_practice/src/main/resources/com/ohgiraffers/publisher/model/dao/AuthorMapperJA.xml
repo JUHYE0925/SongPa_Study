@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.publisher.model.dao.AuthorMapperJA">
+    <resultMap id="authorResultMap" type="com.ohgiraffers.publisher.model.dto.AuthorDTOJA">
+        <id property="authorId" column="AUTHOR_ID"/> <!-- 식별자 컬럼 id 사용-->
+        <result property="authorName" column="AUTHOR_NAME"/> <!--일반 컬럼 result 사용-->
+        <result property="awarded" column="AWARDED"/>
+        <result property="empId" column="EMP_ID"/>
+    </resultMap>
+    <resultMap id="authorAndEmployeeResultMap" type="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTOJA">
+        <id property="authorId" column="AUTHOR_ID"/>
+        <result property="authorName" column="AUTHOR_NAME"/>
+        <result property="awarded" column="AWARDED"/>
+        <result property="empName" column="EMP_NAME"/>
+    </resultMap>
+
+    <insert id="createNewAuthor" parameterType="com.ohgiraffers.publisher.model.dto.AuthorDTOJA">
+        INSERT INTO AUTHOR
+        (
+        AUTHOR_ID,
+        AUTHOR_NAME,
+        AWARDED,
+        EMP_ID
+        )
+        VALUES
+        (
+        #{ authorId },
+        #{ authorName },
+        #{ awarded },
+        #{ empId }
+        )
+    </insert>
+
+    <select id="readAllAuthor" resultMap="authorAndEmployeeResultMap">
+        SELECT
+                A.AUTHOR_ID,
+                A.AUTHOR_NAME,
+                A.AWARDED,
+                B.EMP_NAME
+        FROM AUTHOR A
+        LEFT JOIN EMPLOYEE B USING (EMP_ID)
+        ORDER BY AUTHOR_ID
+    </select>
+
+    <select id="readOneAuthorById" resultMap="authorAndEmployeeResultMap">
+        SELECT *
+        FROM AUTHOR
+        WHERE AUTHOR_ID = #{ authorId }
+    </select>
+
+    <update id="modifyAuthor" parameterType="com.ohgiraffers.publisher.model.dto.AuthorDTOJA">
+        UPDATE AUTHOR
+        SET
+            AWARDED = #{ awarded },
+            EMP_ID = #{ empId }
+        WHERE AUTHOR_ID = #{ authorId }
+    </update>
+
+    <delete id="deleteAuthorInfo" parameterType="_int">
+        DELETE
+          FROM AUTHOR
+         WHERE AUTHOR_ID = #{ authorId }
+    </delete>
+</mapper>

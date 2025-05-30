@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.publisher.model.dao.AuthorMapperJH">
+
+    <resultMap id="authorAndEmployeeResultMap" type="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        <id property="authorId" column="AUTHOR_ID"/>
+        <result property="authorName" column="AUTHOR_NAME"/>
+        <result property="awarded" column="AWARDED"/>
+        <result property="empName" column="EMP_NAME"/>
+    </resultMap>
+
+    <resultMap id="authorIdAndName" type="com.ohgiraffers.publisher.model.dto.AuthorDTO">
+        <id property="authorId" column="AUTHOR_ID"/>
+        <result property="authorName" column="AUTHOR_NAME"/>
+    </resultMap>
+
+    <resultMap id="authorResultMap" type="com.ohgiraffers.publisher.model.dto.AuthorDTO" extends="authorIdAndName">
+        <result property="awarded" column="AWARDED"/>
+        <result property="empId" column="EMP_ID"/>
+    </resultMap>
+
+    <resultMap id="employeeResultMap" type="com.ohgiraffers.publisher.model.dto.EmployeeDTO">
+        <id property="empId" column="EMP_ID"/>
+        <result property="empName" column="EMP_NAME"/>
+        <collection property="authorList" ofType="com.ohgiraffers.publisher.model.dto.AuthorDTO">
+            <id property="authorId" column="AUTHOR_ID"/>
+            <result property="authorName" column="AUTHOR_NAME"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllAuthor" resultMap="authorAndEmployeeResultMap">
+        SELECT
+               A.AUTHOR_ID
+             , A.AUTHOR_NAME
+             , A.AWARDED
+             , B.EMP_NAME
+          FROM AUTHOR A
+          LEFT JOIN EMPLOYEE B ON (A.EMP_ID = B.EMP_ID)
+         ORDER BY AUTHOR_ID
+    </select>
+
+    <select id="selectAllAuthorIdAndName" resultMap="authorIdAndName">
+        SELECT
+               AUTHOR_ID
+             , AUTHOR_NAME
+          FROM AUTHOR
+    </select>
+
+    <select id="selectAuthorByAuthorId" parameterType="_int" resultMap="authorAndEmployeeResultMap">
+        SELECT
+               A.AUTHOR_ID
+             , A.AUTHOR_NAME
+             , A.AWARDED
+             , B.EMP_NAME
+          FROM AUTHOR A
+          LEFT JOIN EMPLOYEE B ON (A.EMP_ID = B.EMP_ID)
+         WHERE A.AUTHOR_ID = #{ authorId }
+    </select>
+
+    <select id="selectAllEmployee" resultMap="employeeResultMap">
+        SELECT
+               A.EMP_ID
+             , A.EMP_NAME
+             , B.AUTHOR_ID
+             , B.AUTHOR_NAME
+          FROM EMPLOYEE A
+          LEFT JOIN AUTHOR B ON (A.EMP_ID = B.EMP_ID)
+         ORDER BY EMP_ID
+    </select>
+
+    <insert id="registNewAuthor" parameterType="com.ohgiraffers.publisher.model.dto.AuthorDTO">
+        INSERT INTO AUTHOR
+        (
+            AUTHOR_ID
+          , AUTHOR_NAME
+          , AWARDED
+          , EMP_ID
+        )
+        VALUES
+        (
+            null
+          , #{ authorName }
+          , #{ awarded }
+          , #{ empId }
+        )
+    </insert>
+
+    <update id="modifyAuthorInfo" parameterType="com.ohgiraffers.publisher.model.dto.AuthorDTO">
+        UPDATE AUTHOR
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="authorName != null and authorName != ''">
+                , AUTHOR_NAME = #{ authorName }
+            </if>
+            <if test="awarded != null">
+                , AWARDED = #{ awarded }
+            </if>
+        </trim>
+         WHERE AUTHOR_ID = #{ authorId }
+    </update>
+
+    <delete id="deleteAuthorInfo" parameterType="_int">
+        DELETE FROM AUTHOR
+         WHERE AUTHOR_ID = #{ authorId }
+    </delete>
+</mapper>

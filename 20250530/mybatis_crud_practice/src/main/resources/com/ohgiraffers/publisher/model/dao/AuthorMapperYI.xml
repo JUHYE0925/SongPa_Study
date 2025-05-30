@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.publisher.model.dao.AuthorMapperYI">
+    <resultMap id="authorAndEmpMap" type="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        <id property="authorId" column="AUTHOR_ID"/>
+        <result property="authorName" column="AUTHOR_NAME"/>
+        <result property="awarded" column="AWARDED"/>
+        <result property="empId" column="EMP_ID"/>
+        <result property="empName" column="EMP_NAME"/>
+    </resultMap>
+
+    <!--<resultMap id="empResultMap" type="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        <result property="empName" column="EMP_NAME"/>
+    </resultMap>-->
+
+    <!--    <resultMap id="authorAndBookMap" type="com.ohgiraffers.publisher.model.dto.AuthorAndBookDTO">
+            <id property="bookCode" column="BOOK_CODE"/>
+            <result property="bookName" column="BOOK_NAME"/>
+            <result property="authorName" column="AUTHOR_NAME"/>
+        </resultMap>-->
+
+    <select id="selectAllAuthor" resultMap="authorAndEmpMap">
+        SELECT AUTHOR_ID
+        , AUTHOR_NAME
+        , AWARDED
+        , EMP_ID
+        FROM AUTHOR
+    </select>
+
+    <select id="selectAuthorByCode" resultMap="authorAndEmpMap">
+        SELECT AUTHOR_ID
+        , AUTHOR_NAME
+        , AWARDED
+        , EMP_ID
+        FROM AUTHOR
+        WHERE AUTHOR_ID = #{code}
+    </select>
+
+    <select id="selectAllAuthorWithEmp" resultMap="authorAndEmpMap">
+        SELECT A.AUTHOR_ID
+        , A.AUTHOR_NAME
+        , A.AWARDED
+        , A.EMP_ID
+        , B.EMP_NAME
+        FROM AUTHOR A
+        LEFT JOIN EMPLOYEE B ON (A.EMP_ID = B.EMP_ID)
+    </select>
+
+    <select id="selectAuthorByCodeWithEmp" resultMap="authorAndEmpMap">
+        SELECT A.AUTHOR_ID
+        , A.AUTHOR_NAME
+        , A.AWARDED
+        , A.EMP_ID
+        , B.EMP_NAME
+        FROM AUTHOR A
+        JOIN EMPLOYEE B ON (A.EMP_ID = B.EMP_ID)
+        WHERE A.AUTHOR_ID = #{ code }
+    </select>
+
+    <insert id="insertAuthor" parameterType="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        INSERT INTO AUTHOR(
+        AUTHOR_NAME
+        , AWARDED
+        , EMP_ID
+        )
+        VALUES
+        (
+        #{ authorName }
+        , #{ awarded }
+        , #{ empId }
+        );
+    </insert>
+
+    <update id="updateAuthor" parameterType="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        UPDATE AUTHOR
+        SET AWARDED = #{ awarded }
+        , EMP_ID = #{ empId }
+        WHERE AUTHOR_ID = #{ authorId }
+    </update>
+
+    <delete id="deleteAuthor" parameterType="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        DELETE FROM AUTHOR
+        WHERE AUTHOR_ID = #{ authorId }
+    </delete>
+
+</mapper>

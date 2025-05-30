@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.publisher.model.dao.publisherMapperGY">
+
+    <resultMap id="authorAndEmployeeResultMap" type="com.ohgiraffers.publisher.model.dto.AuthorAndEmployeeDTO">
+        <id property="authorId" column="author_id"/>
+        <result property="authorName" column="author_name"/>
+        <result property="awarded" column="awarded"/>
+        <result property="empId" column="emp_id"/>
+        <result property="empName" column="emp_name"/>
+    </resultMap>
+
+    <select id="selectAllAuthors" resultMap="authorAndEmployeeResultMap">
+        SELECT
+        a.author_id,
+        a.author_name,
+        a.awarded,
+        a.emp_id,
+        e.EMP_NAME AS emp_name
+        FROM author a
+        LEFT JOIN employee e ON a.emp_id = e.EMP_ID
+        ORDER BY a.author_id
+    </select>
+
+    <select id="selectAuthorById" parameterType="int" resultMap="authorAndEmployeeResultMap">
+        SELECT
+        a.author_id,
+        a.author_name,
+        a.awarded,
+        a.emp_id,
+        e.EMP_NAME AS emp_name
+        FROM author a
+        LEFT JOIN employee e ON a.emp_id = e.EMP_ID
+        WHERE a.author_id = #{authorId}
+    </select>
+
+    <insert id="insertAuthor" parameterType="map" useGeneratedKeys="true" keyProperty="authorId">
+        INSERT INTO author (author_name, awarded, emp_id)
+        VALUES (#{name}, #{awarded}, #{empId})
+    </insert>
+
+    <update id="updateAuthor" parameterType="map">
+        UPDATE author
+        SET author_name = #{name},
+        awarded = #{awarded},
+        emp_id = #{empId}
+        WHERE author_id = #{authorId}
+    </update>
+
+    <delete id="deleteBooksByAuthorId" parameterType="int">
+        DELETE FROM book WHERE author_code = #{authorId}
+    </delete>
+
+    <delete id="deleteAuthor" parameterType="int">
+        DELETE FROM author WHERE author_id = #{authorId}
+    </delete>
+
+</mapper>
