@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Exception Handler 실습</h1>
+
+    <h3>BOA 은행에 오신 것을 환영합니다.</h3>
+    <h4>이용할 서비스를 선택해주세요.</h4>
+
+    <h5>입금</h5>
+    <button onclick="location.href='bank/deposit'">입금</button>
+    <script>
+        const depositMessage = '[[${depositMessage}]]';
+
+        console.log(depositMessage);
+
+        if (depositMessage){
+            alert(depositMessage);
+        }
+    </script>
+
+    <h5>출금</h5>
+    <button onclick="location.href='bank/withdraw'">출금</button>
+</body>
+</html>
