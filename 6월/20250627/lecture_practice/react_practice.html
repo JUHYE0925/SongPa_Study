@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {useState} = React;
+
+        const headerStyle = {
+            height : 80,
+            top : '0px',
+            textAlign : 'center',
+            color : 'white',
+            backgroundColor : 'black'
+        }
+
+        const backStyle = {
+            backgroundColor : 'lightGray',
+            height: '100vh', // 화면 전체 높이 기준
+            height : 880
+        }
+
+        const bodyStyle = {
+            display : 'flex',
+            justifyContent : 'center',
+            alignItems : 'center',
+            height: '70vh', // 화면 전체 높이 기준
+            flexDirection: 'column',
+        }
+
+        const buttonStyle = {
+            backgroundColor : 'green', 
+            color : 'white', 
+            border : 'none', 
+            borderRadius : 5, 
+            marginLeft : 10
+        }
+
+        const cancleLine = {
+            textDecoration : 'lineThrough'
+        }
+
+        function ToDoList(){
+            
+            const [inputValue, setInputValue] = useState('');
+            const [list, setList] = useState([{ id : 1, content : '할일 목록을 추가할 것', isDone : false }]);
+            const [nextListId, setNextListId] = useState(2);
+
+            const changeHandler = (e) => {
+                setInputValue(e.target.value);
+            }
+
+            const handleAddList = () => {
+                if(inputValue.trim() === '') return;
+
+                const newInput = {id : nextListId, content : inputValue, isDone : false}
+
+                setList([...list, newInput]);
+
+                setInputValue('');
+
+                setNextListId(nextListId + 1);
+            }
+
+            const handleRemoveList = (id) => {
+                const updated = list.filter(list => list.id !== id);
+
+                setList(updated);
+            }
+
+           const toggleCancleLine = (id) => {
+                // 체크 박스 누르면 해당 아이디를 받아와서 해당 아이디를 가진 요소의 isDone을 반전시킨다.
+                const updated = list.map(list => list.id === id ? {...list, isDone : !list.isDone} : list);
+
+                setList(updated);
+           }
+
+            return(
+                <div style={ backStyle }>
+                    <div id="header" style={ headerStyle }>
+                        <h1>오늘의 할 일! {new Date().toLocaleDateString()}</h1>
+                    </div>
+                    <div id="toDoList" style = {bodyStyle}>
+                        <h4 style={{textAlign : 'center'}}>ToDo-List</h4>
+                        <div style={{ width : 400, height : 500, backgroundColor : 'white', border : '1px solid black', alignItems : 'center', textAlign : 'center', paddingTop : 10}}>
+                            <label htmlFor="listContent">
+                                {list.map((list) => (
+                                   <>
+                                        <input 
+                                            type="checkBox" 
+                                            style={{marginRight : 10}} 
+                                            onClick={() => toggleCancleLine(list.id)}/>
+                                            {/* isDone 속성이 true이면 취소선 생기고 false이면 그대로 둔다. */}
+                                        <span key={list.id} style={{textDecoration : list.isDone ? 'line-through' : 'none'}}>{list.content}</span> 
+                                        <button style={{marginLeft : 10}} onClick={() => handleRemoveList(list.id)}>❌</button>
+                                        <br/>
+                                   </>
+                                ))}
+                            </label>
+                        </div>
+                        <br/>
+                        <div style={{display : 'inline-block'}}>
+                            <input 
+                                type="text"
+                                id="listContent"
+                                value = {inputValue}
+                                onChange={changeHandler}
+                                onKeyDown={(e) => {if(e.key === "Enter") handleAddList()}}
+                            />
+                            <button style={buttonStyle} onClick={handleAddList} onKeyDown={(e) => {if(e.key === 'Enter') handleAddList()}}>추가하기</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<ToDoList/>);
+    </script>
+</body>
+</html>
