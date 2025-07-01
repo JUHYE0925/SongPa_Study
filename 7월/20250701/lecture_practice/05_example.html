@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .card {
+            border: 1px solid black;
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            display: inline-block;
+        }
+        .card > * {
+            display: inline-block;
+        }
+        .card > img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {useState, useEffect} = React;
+
+        function Title(){
+            return(
+                <h1 style={{textAlign : 'center'}}>포켓몬 목록</h1>
+            )
+        }
+
+        function PokemonList(){
+
+            const [pokemon, setPokemon] = useState([]);
+
+            // 전체 포케몬 목록에 대한 API 요청 => 비동기 요청1
+            // https://pokeapi.co/api/v2/pokemon
+
+            useEffect(() => {
+                fetch('https://pokeapi.co/api/v2/pokemon')
+                .then(res => res.json())
+                .then(data => {
+                    const pokemonList = data.results;
+
+                    setPokemon(pokemonList);
+                })
+            }, [])
+
+            return(
+                <>
+                    <div style={{textAlign : 'center'}}>
+                        {pokemon.map(pokemon => (
+                            <Card key={pokemon.name} pokemon={pokemon}/>
+                        ))}
+                    </div>
+                </>
+            )
+        }
+
+        function Card({pokemon}){
+            // 한 포켓몬의 이미지 주소 요청 (이전 api 요청의 결과의 url 속성으로 존재함)  => 비동기 요청2
+            // ex) https://pokeapi.co/api/v2/pokemon/1
+            // sprites.front_default 속성 이미지 사용 => 앞모습 이미지
+
+            const [pokemonInfo, setPokemonInfo] = useState({});
+            const [frontImg, setFrontImg] = useState('');
+
+            useEffect(() => {
+                fetch(`${pokemon.url}`)
+                .then(res => res.json())
+                .then(result => {
+                    setPokemonInfo(result);
+                    setFrontImg(result.sprites.front_default);
+
+                })
+            }, [])
+
+            return(
+                <div className="card">
+                    <img src={frontImg}/>
+                    <div className="info">
+                        <h2>No.{pokemonInfo.order}</h2>
+                        <h3>name : {pokemonInfo.name}</h3>
+                    </div>
+                </div>
+            )
+        }
+
+        function App(){
+            return(
+                <>
+                    <Title/>
+                    <PokemonList/>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+    </script>
+</body>
+</html>
