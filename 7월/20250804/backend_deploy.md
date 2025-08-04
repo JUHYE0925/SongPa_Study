@@ -1,4 +1,4 @@
-### ❗ 프로젝트 기간동안 작업 결과물(PullRequest)로 대신하여 교육 일지 작성 ❗
+### ❗ 프로젝트 기간동안 작업 결과물(deploy.yml, Dockerfile, compose.yaml)로 대신하여 교육 일지 작성 ❗
 
 #### DEPLOY.yml
 
